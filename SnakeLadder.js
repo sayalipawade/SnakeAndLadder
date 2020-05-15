@@ -13,40 +13,66 @@ let NOPLAY=0
  * Variables
  */
 let position_Of_Player=0
-let win=0
+let dieNo=0
+let result1=0
+let result2=0
+let randomPosition=0
 
 /**
  * Player checking for option-no play,snake or ladder
  */
-while(position_Of_Player<WINNINGPOSITION)
+function playGame()
 {
-    //Generating random no
-    let randomPosition=Math.floor(Math.random()*6+1);
-    let option=Math.floor(Math.random()*3+1)
-    switch(option)
+    while(position_Of_Player<WINNINGPOSITION)
     {
-        case NOPLAY:
-                position_Of_Player=0
-                break;
-        case LADDER:
-                position_Of_Player=(position_Of_Player+randomPosition) 
-                win++
-                if(position_Of_Player>WINNINGPOSITION)
-                {
-                    position_Of_Player=position_Of_Player-randomPosition
-                }
-                break;
-        case SNAKE:
-                if(position_Of_Player<STARTPOSITION)
-                {
-                    position_Of_Player=STARTPOSITION
-                }
-                else
-                {
-                    position_Of_Player=position_Of_Player-randomPosition
-                }
-                break;
+        randomPosition=Math.floor(Math.random()*6+1);
+        let option=Math.floor(Math.random()*3)
+        switch(option)
+        {
+            case NOPLAY:
+                    position_Of_Player=position_Of_Player
+                    break;
+            case LADDER:
+                    Result=(position_Of_Player+randomPosition) 
+                    if(Result>WINNINGPOSITION)
+                    {
+                        position_Of_Player=position_Of_Player
+                    }
+                    else
+                    {
+                        position_Of_Player=position_Of_Player+randomPosition
+                    }
+                    break;
+            case SNAKE:
+                    if(position_Of_Player<randomPosition)
+                    {
+                        position_Of_Player=position_Of_Player
+                    }
+                    else
+                    {
+                        position_Of_Player=position_Of_Player-randomPosition
+                    }
+                    break;
+        }
+        dieNo++
     }
-    console.log(position_Of_Player)
+    return dieNo
 }
-console.log("Winning count:"+win)
+
+/**
+ * playing the game for two players
+ */
+player1=playGame()
+player2=playGame()
+
+if(player1>player2)
+{
+    console.log("player1 won")
+}
+else
+{
+    console.log("player2 won")
+}
+
+
+
