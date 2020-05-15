@@ -13,6 +13,7 @@ let NOPLAY=0
  * Variables
  */
 let position_Of_Player=0
+let win=0
 
 /**
  * Player checking for option-no play,snake or ladder
@@ -28,15 +29,24 @@ while(position_Of_Player<WINNINGPOSITION)
                 position_Of_Player=0
                 break;
         case LADDER:
-                position_Of_Player=position_Of_Player+randomPosition
+                position_Of_Player=(position_Of_Player+randomPosition) 
+                win++
+                if(position_Of_Player>WINNINGPOSITION)
+                {
+                    position_Of_Player=position_Of_Player-randomPosition
+                }
                 break;
         case SNAKE:
-                position_Of_Player=position_Of_Player-randomPosition
+                if(position_Of_Player<STARTPOSITION)
+                {
+                    position_Of_Player=STARTPOSITION
+                }
+                else
+                {
+                    position_Of_Player=position_Of_Player-randomPosition
+                }
                 break;
     }
     console.log(position_Of_Player)
-    if(position_Of_Player<0)
-    {
-        position_Of_Player=0;
-    }
 }
+console.log("Winning count:"+win)
