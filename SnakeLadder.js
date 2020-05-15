@@ -14,23 +14,28 @@ let ladder=1
 let noPlay=0
 
 /**
- * Generating random no
- */
-let randomPosition=Math.floor(Math.random()*6+1);
-
-/**
  * Player checking for option-no play,snake or ladder
  */
-let option=Math.floor(Math.random()*3+1)
-switch(option)
+for(let i=0;i<100;i++)
 {
-    case noPlay:
-        position_Of_Player=0
-        break;
-    case ladder:
-        position_Of_Player=position_Of_Player+randomPosition
-        break;
-    case snake:
-        position_Of_Player=position_Of_Player-randomPosition
-        break;
+    //Generating random no
+    let randomPosition=Math.floor(Math.random()*6+1);
+    let option=Math.floor(Math.random()*3+1)
+    switch(option)
+    {
+        case noPlay:
+                position_Of_Player=0
+                break;
+        case ladder:
+                position_Of_Player=position_Of_Player+randomPosition
+                break;
+        case snake:
+                position_Of_Player=position_Of_Player-randomPosition
+                break;
+    }
+    console.log(position_Of_Player)
+    if(position_Of_Player<0)
+    {
+        position_Of_Player=0;
+    }
 }
