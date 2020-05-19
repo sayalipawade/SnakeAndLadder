@@ -1,5 +1,3 @@
-console.log("******Welcome to snake and ladder******")
-
 /**
  * Constants
  */
@@ -14,65 +12,73 @@ let NOPLAY=0
  */
 let position_Of_Player=0
 let dieNo=0
-let result1=0
-let result2=0
+let player1=0
+let player2=0
 let randomPosition=0
+let Result=0
 
-/**
- * Player checking for option-no play,snake or ladder
- */
-function playGame()
+class SnakeLadder
 {
-    while(position_Of_Player<WINNINGPOSITION)
+    /**
+     * Player checking for option-no play,snake or ladder
+     */
+    playGame()
     {
-        randomPosition=Math.floor(Math.random()*6+1);
-        let option=Math.floor(Math.random()*3)
-        switch(option)
+        while(position_Of_Player<WINNINGPOSITION)
         {
-            case NOPLAY:
-                    position_Of_Player=position_Of_Player
-                    break;
-            case LADDER:
-                    Result=(position_Of_Player+randomPosition) 
-                    if(Result>WINNINGPOSITION)
-                    {
+            randomPosition=Math.floor(Math.random()*10)%6
+            let option=Math.floor(Math.random()*10)%3
+            switch(option)
+            {
+                case NOPLAY:
                         position_Of_Player=position_Of_Player
-                    }
-                    else
-                    {
-                        position_Of_Player=position_Of_Player+randomPosition
-                    }
-                    break;
-            case SNAKE:
-                    if(position_Of_Player<randomPosition)
-                    {
-                        position_Of_Player=position_Of_Player
-                    }
-                    else
-                    {
-                        position_Of_Player=position_Of_Player-randomPosition
-                    }
-                    break;
+                        break;
+                case LADDER:
+                        Result=(position_Of_Player+randomPosition) 
+                        if(Result>WINNINGPOSITION)
+                        {
+                            position_Of_Player=position_Of_Player
+                        }
+                        else
+                        {
+                            position_Of_Player=position_Of_Player+randomPosition
+                        }
+                        break;
+                case SNAKE:
+                        if(position_Of_Player<randomPosition)
+                        {
+                            position_Of_Player=position_Of_Player
+                        }
+                        else
+                        {
+                            position_Of_Player=position_Of_Player-randomPosition
+                        }
+                        break;
+            }
+            dieNo++
         }
-        dieNo++
+        return dieNo
     }
-    return dieNo
-}
 
-/**
- * playing the game for two players
- */
-player1=playGame()
-player2=playGame()
+    /**
+     * playing the game for two players
+     */
+    gameForTwoPlayers()
+    {
+        player1=this.playGame()
+        player2=this.playGame()
 
-if(player1>player2)
-{
-    console.log("player1 won")
+        if(player1>player2)
+        {
+            console.log("player1 won")
+        }
+        else
+        {
+            console.log("player2 won")
+        }
+    }
 }
-else
-{
-    console.log("player2 won")
-}
+module.exports=SnakeLadder;
 
 
 
